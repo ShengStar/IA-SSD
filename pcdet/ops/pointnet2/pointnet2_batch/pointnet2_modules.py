@@ -249,6 +249,8 @@ class PointnetSAModuleMSG_WithSampling(_PointnetSAModuleBase):
         """
         new_features_list = []
         xyz_flipped = xyz.transpose(1, 2).contiguous() 
+        
+
         sampled_idx_list = []
         if ctr_xyz is None:
             last_sample_end_index = 0
@@ -280,6 +282,8 @@ class PointnetSAModuleMSG_WithSampling(_PointnetSAModuleBase):
                     sample_idx = sample_idx.int()
 
                 elif 'D-FPS' in sample_type or 'DFS' in sample_type:
+                    # print(xyz_tmp.shape)
+                    # print(npoint)
                     sample_idx = pointnet2_utils.furthest_point_sample(xyz_tmp.contiguous(), npoint)
 
                 elif 'F-FPS' in sample_type or 'FFS' in sample_type:
